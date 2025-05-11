@@ -1,0 +1,46 @@
+Tác Giả: 
+Trần Lê Thiên Ân 	22146265
+Đỗ Đức Tuấn		22146440
+Đoàn Mạnh Kha 		22146326
+Đào Chí Quân		22146380			
+			RaspberryPi USB Mouse IOCTL
+
+Usage: 
+Step 1: Connect the mouse to the raspberryPi board 
+Step 2: Delete the driver automatically installed by the mouse on the board 
+- After inserting the mouse into the board, use the following commands to find the device ID of the mouse 
+- Use the lsusb command to find the usb mouse device
+admin@raspberrypi:~ $ lsusb
+Bus 001 Device 005: ID 30fa:0400  USB Optical Mouse
+Bus 001 Device 004: ID 0424:7800 Microchip Technology, Inc. (formerly SMSC)
+Bus 001 Device 003: ID 0424:2514 Microchip Technology, Inc. (formerly SMSC) USB 2.0 Hub
+Bus 001 Device 002: ID 0424:2514 Microchip Technology, Inc. (formerly SMSC) USB 2.0 Hub
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+
+- Next, use lsusb -t to find the correct port of the mouse
+admin@raspberrypi:~ $ lsusb -t
+/:  Bus 01.Port 1: Dev 1, Class=root_hub, Driver=dwc_otg/1p, 480M
+    |__ Port 1: Dev 2, If 0, Class=Hub, Driver=hub/4p, 480M
+        |__ Port 1: Dev 3, If 0, Class=Hub, Driver=hub/3p, 480M
+            |__ Port 1: Dev 4, If 0, Class=Vendor Specific Class, Driver=lan78xx, 480M
+        |__ Port 2: Dev 5, If 0, Class=Human Interface Device, Driver=usbhid, 1.5M
+my address in this case would be 1-1.2:1.0 (Bus 1 - port1. port2 : SubDevice(usually 1:0))
+
+- Then run the bind.sh file with the found address : sudo bash bind.sh 1-1.2:1.0
+admin@raspberrypi:~/test_mouse $ sudo bash bind.sh 1-1.2:1.0
+Rebinding 1-1.2:1.0...
+-Step 3: install module:
+admin@raspberrypi:~/test_mouse $ make
+admin@raspberrypi:~/test_mouse $ sudo insmod mouse_device_driver.ko
+-Step 4: check again
+admin@raspberrypi:~/test_mouse $ dmesg
+
+if available 
+[ 1091.583291] usb_mouse_ioctl_driver: USB mouse da ket noi thanh cong
+[ 1091.583462] usbcore: registered new interface driver usb_mouse_ioctl_driver
+is a successful driver installation
+
+- Step 5: run the demo code to test:
+admin@raspberrypi:~/test_mouse $ gcc test_user.c -o run
+admin@raspberrypi:~/test_mouse $ sudo ./run
+Then try to move the mouse to observe the changes in the output data values of the mouse
