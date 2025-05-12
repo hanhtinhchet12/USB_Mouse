@@ -4,6 +4,14 @@ Trần Lê Thiên Ân 	22146265
 Đoàn Mạnh Kha 		22146326
 Đào Chí Quân		22146380			
 			RaspberryPi USB Mouse IOCTL
+Note: Not all USB mice send data in the same format. To get the most accurate results for each type of mouse, you need to test and adjust the parameters in the void usb_mouse_irq() function.
+For example, currently the movement along the X and Y axes is handled as:
+	current_data.x = mouse_buf[1];
+	current_data.y = mouse_buf[2];
+However, for some other mice, it might be:
+	current_data.x = mouse_buf[2];
+	current_data.y = mouse_buf[3];
+or use different values altogether.
 
 Usage: 
 Step 1: Connect the mouse to the raspberryPi board 
