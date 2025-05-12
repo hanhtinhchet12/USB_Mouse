@@ -105,13 +105,15 @@ By default, mouse movement along the X and Y axes is read as:
 ```c
 current_data.x = mouse_buf[1];
 current_data.y = mouse_buf[2];
+current_data.wheel = mouse_buf[4];
 ```
 
 However, for some other mice, the correct mapping might be:
 
 ```c
 current_data.x = mouse_buf[2];
-current_data.y = mouse_buf[3];
+current_data.y = mouse_buf[4];
+current_data.wheel = mouse_buf[6];
 ```
 
 Or, in some cases, it may use entirely different offsets or formats.
