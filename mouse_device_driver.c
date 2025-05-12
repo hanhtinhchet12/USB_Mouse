@@ -109,7 +109,7 @@ static long mouse_ioctl(struct file *file, unsigned int cmd, unsigned long arg)
     return -EINVAL;
 }
 // 2 ham duoi co chuc nang thong bao
-// khi user dong mo file
+// khi user dong mo file 
 static int mouse_open(struct inode *inode, struct file *file)
 {
 	printk(KERN_INFO "file driver da duoc mo thanh cong\n");
@@ -164,7 +164,7 @@ static int usb_mouse_probe(struct usb_interface *interface, const struct usb_dev
 	mouse_intf = interface;
 
 	usb_submit_urb(mouse_urb, GFP_KERNEL);
-
+// phan nay de dang ki device driver
 	alloc_chrdev_region(&dev_number, 0, 1, DEVICE_NAME);
 	cdev_init(&mouse_cdev, &mouse_fops);
 	mouse_cdev.owner = THIS_MODULE;
