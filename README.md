@@ -92,6 +92,34 @@ This project demonstrates how to manually connect and control a USB mouse on a R
 3. Move the mouse and observe the changes in the output data values.
 
 ---
+# 🖱️ USB Mouse Data Handling
+
+## ⚠️ Note
+
+Not all USB mice send data in the same format. To ensure accurate behavior across different mouse models, you may need to experiment and adjust how data is parsed in the `usb_mouse_irq()` function.
+
+## 📦 Example
+
+By default, mouse movement along the X and Y axes is read as:
+
+```c
+current_data.x = mouse_buf[1];
+current_data.y = mouse_buf[2];
+```
+
+However, for some other mice, the correct mapping might be:
+
+```c
+current_data.x = mouse_buf[2];
+current_data.y = mouse_buf[3];
+```
+
+Or, in some cases, it may use entirely different offsets or formats.
+
+## ✅ Recommendation
+
+Always test your implementation with the actual mouse hardware you intend to support. If possible, add logging or debugging output to inspect the raw content of `mouse_buf[]` to determine the correct interpretation.
+
 
 ## Troubleshooting
 - Ensure the mouse is connected properly to the Raspberry Pi.
