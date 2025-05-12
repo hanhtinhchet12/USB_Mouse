@@ -17,7 +17,7 @@
 
 // Cai nay la ma chuot da dung de test
 #define USB_MOUSE_VENDOR_ID    0x30FA
-#define USB_MOUSE_PRODUCT_ID   0xc0400
+#define USB_MOUSE_PRODUCT_ID   0x0400
 
 // day se la bien dung de coppy yeu cau tu user xuong
 #define MOUSE_IOCTL_BASE      'M'
