@@ -1,11 +1,7 @@
 # RaspberryPi USB Mouse IOCTL
 
 ## Authors:
-- Trần Lê Thiên Ân (22146265)
-- Đỗ Đức Tuấn (22146440)
-- Đoàn Mạnh Kha (22146326)
-- Đào Chí Quân (22146380)
-
+- Trần Lê Thiên Ân
 ---
 
 ## Overview
